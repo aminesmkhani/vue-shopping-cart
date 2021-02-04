@@ -19,11 +19,9 @@
                 <p v-else-if="inventory <= 10 && inventory > 0">تقریباً فروخته شده است</p>
                 <p v-else>اتمام موجودی</p>
                 <p v-show="onSale">حراج</p>
-
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                 </ul>
-
                 <div v-for="variant in variants">
                     <p @mouseover="updateProduct(variant.variantImage)">{{variant.variantColor}}</p>
                 </div>
