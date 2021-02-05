@@ -38,11 +38,6 @@ Vue.component('product',{
           >
         Add to cart
         </button>
-
-        <div class="cart">
-          <p>Cart({{ cart }})</p>
-        </div>
-
       </div>  
     
   </div>
@@ -53,7 +48,6 @@ Vue.component('product',{
             brand: 'Vue Mastery',
             selectedVariant: 0,
             details: ['80% cotton', '20% polyester', 'Gender-neutral'],
-            cart: 0,
             onSale: true,
             variants:[
                 {
@@ -72,13 +66,15 @@ Vue.component('product',{
             ]
         }
     },
-    
-    methods:{
-        addToCart() {
-            this.cart += 1
+    methods: {
+        addToCart: function() {
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
         },
-        updateProduct(index){
+        updateProduct: function(index) {
             this.selectedVariant = index
+        },
+        removeFromCart: function() {
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId)
         }
     },
     computed:{
@@ -109,6 +105,19 @@ Vue.component('product',{
 var app = new Vue({
     el:'#app',
     data:{
-        premium:false
+        premium:false,
+        cart: []
+    },
+  methods: {
+    updateCart(id) {
+        this.cart.push(id)
+    },
+    removeItem(id) {
+        for(var i = this.cart.length - 1; i >= 0; i--) {
+            if (this.cart[i] === id) {
+                this.cart.splice(i, 1);
+            }
+        }
     }
+}
 })
