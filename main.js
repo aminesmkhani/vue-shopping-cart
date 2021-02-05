@@ -5,7 +5,7 @@ var app = new Vue({
         product : 'جوراب',
         image: './asset/vmSocks-green-onWhite.jpg',
         inventory:0,
-        onSale: false,
+        onSale: true,
         details:["80% Cotton","20% polyester","Gender-neurtal"],
         cart:0,
         variants:[
